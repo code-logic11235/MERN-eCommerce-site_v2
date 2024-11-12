@@ -1,0 +1,32 @@
+{
+  "name": "shophaven",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "MERN-stack Ecommerce web app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/backend/app.js",
+    "dev": "NODE_ENV=DEVELOPMENT nodemon src/backend/app.js",
+    "prod": "NODE_ENV=PRODUCTION nodemon src/backend/app.js" 
+ 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-logic11235/MERN-eCommerce-site_v2.git"
+  },
+  "author": "Tai Pham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/code-logic11235/MERN-eCommerce-site_v2/issues"
+  },
+  "homepage": "https://github.com/code-logic11235/MERN-eCommerce-site_v2#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
