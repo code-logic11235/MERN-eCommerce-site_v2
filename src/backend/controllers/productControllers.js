@@ -1,13 +1,26 @@
 import Product from "../models/products.js";
+import ErrorHandler from "../utils/errorHandler.js";
+import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
+import APIFilters from "../utils/apiFilters.js";
+
 //logic for our product resource
 
 //=> /api/products
-export const getProducts = async (req, res) =>{
-    const products = await Product.find();
+export const getProducts = catchAsyncErrors (async (req, res) =>{
+    const itemPerPage = 4;
+    const apiFilters = new APIFilters(Product, req.query).search().filters(); 
+
+    let products = await apiFilters.query; // returns the result and access it by going inside of object
+    let productCount = products.length
+    
+    apiFilters.pagination(itemPerPage);
+    products = await apiFilters.query.clone();
     res.status(200).json({
-       products
+        itemPerPage,
+        productCount,
+        products
     });
-};
+});
 
 // creating a model
 //const userSchema = new mongoose.Schema({
@@ -24,35 +37,32 @@ export const getProducts = async (req, res) =>{
 //     .catch(err => console.error('Error:', err));
 
 // admin route, only admin can create new products. => /api/admin/products
-export const newProduct = async (req, res) =>{
+export const newProduct = catchAsyncErrors (async (req, res) =>{
     //req.body will have all the info we need like name, price, quantity ect.. 
     const product = await Product.create(req.body);
     //when product gets created we return response 
     res.status(200).json({
         product
     });
-}
+});
+
 //get single product details => /api/products/:id
-export const getProduct = async (req, res) =>{
+export const getProductDetails = catchAsyncErrors (async (req, res, next) =>{
     const product = await Product.findById(req?.params?.id);
     if(!product){
-        return res.status(404).json({
-            error: "Product not found",
-        });
+        return next(new ErrorHandler('Product Not Found', 404));
     }
 
     res.status(200).json({
         product
     });
-}
+});
 
 //ADMIN put  => /api/admin/products/:id     maybe admin TODO:
-export const updateProduct = async (req, res) =>{
+export const updateProduct = catchAsyncErrors (async (req, res, next) =>{
     let product = await Product.findById(req?.params?.id);
     if(!product){
-        return res.status(404).json({
-            error: "Product not found",
-        });
+        return next(new ErrorHandler('Product Not Found', 404));
     }
     product = await Product.findByIdAndUpdate(req?.params?.id, req.body, 
         {new: true} // return updated object when done
@@ -61,19 +71,17 @@ export const updateProduct = async (req, res) =>{
     res.status(200).json({
         product
     });
-}
+});
 
-//ADMIN put  => /api/admin/products/:id
-export const deleteProduct = async (req, res) =>{
+//ADMIN delete  => /api/admin/products/:id
+export const deleteProduct = catchAsyncErrors (async (req, res, next) =>{
     const product = await Product.findById(req?.params?.id);
     if(!product){
-        return res.status(404).json({
-            error: "Product not found",
-        });
+        return next(new ErrorHandler('Product Not Found', 404));
     }
    await product.deleteOne();
 
     res.status(200).json({
         message: "product deleted"
     });
-}
+});

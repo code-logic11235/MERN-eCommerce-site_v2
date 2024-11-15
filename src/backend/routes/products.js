@@ -3,7 +3,7 @@ const router = express.Router();
 import { 
     getProducts, 
     newProduct, 
-    getProduct,
+    getProductDetails,
     updateProduct,
     deleteProduct
 
@@ -16,7 +16,7 @@ router.route("/products").get(getProducts); //getProducts is our controller func
 
 router.route("/admin/products").post(newProduct);
 
-router.route("/products/:id").get(getProduct);
+router.route("/products/:id").get(getProductDetails);
 
 router.route("/products/:id").put(updateProduct);
 
