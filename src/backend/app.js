@@ -1,8 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
-const app = express();
 import { connectDatabase } from './config/dbConnection.js';
 import errorsMiddleware from './middlewares/errorHandlerMiddleware.js';
+import productRoutes from './routes/products.js';
+import authRoutes from './routes/auth.js';
+import cookieParser from 'cookie-parser';
+
+const app = express();
 
 process.on('uncaughtException', (err) => {
     console.log('Uncaught Exception:', err);
@@ -24,10 +28,12 @@ dotenv.config({path: "src/backend/config/config.env"});
 //connecting to DB
 connectDatabase();
 //middle ware parse incoming request wiht JSON. based on body parser
-app.use(express.json())
+app.use(express.json());
+app.use(cookieParser());
+
 //import all routes
-import productRoutes from './routes/products.js';
-app.use("/api", productRoutes)
+app.use("/api", productRoutes);
+app.use("/api", authRoutes);
 
 // when you use "next()" in our controller it will send a error object to our errorsMiddleware
 app.use(errorsMiddleware);

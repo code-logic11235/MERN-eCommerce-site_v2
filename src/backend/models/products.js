@@ -19,7 +19,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    images: [ {public_id: {type: String,required: true},
+    images: [ {public_id: {type: String, required: true},
             url: {
                 type: String,
                 required: true
@@ -85,7 +85,7 @@ const productSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId, //user that created the product
         ref: 'User',
-        required: false
+        required: true
     }},
 
 {timeStamps: true}

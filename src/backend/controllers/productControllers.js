@@ -10,11 +10,13 @@ export const getProducts = catchAsyncErrors (async (req, res) =>{
     const itemPerPage = 4;
     const apiFilters = new APIFilters(Product, req.query).search().filters(); 
 
+    console.log(req.user)
     let products = await apiFilters.query; // returns the result and access it by going inside of object
     let productCount = products.length
     
     apiFilters.pagination(itemPerPage);
     products = await apiFilters.query.clone();
+    // res.clearCookie('jwttoken')
     res.status(200).json({
         itemPerPage,
         productCount,
@@ -22,23 +24,11 @@ export const getProducts = catchAsyncErrors (async (req, res) =>{
     });
 });
 
-// creating a model
-//const userSchema = new mongoose.Schema({
-//     name: String,
-//     age: Number
-//   });
-  
-//   // Create a model
-//   const User = mongoose.model('User', userSchema);
-  
-//   // Create and save a new user
-//   User.create({ name: 'Alice', age: 25 })
-//     .then(user => console.log('User created:', user))
-//     .catch(err => console.error('Error:', err));
 
 // admin route, only admin can create new products. => /api/admin/products
 export const newProduct = catchAsyncErrors (async (req, res) =>{
-    //req.body will have all the info we need like name, price, quantity ect.. 
+
+    req.body.user = req.user._id;
     const product = await Product.create(req.body);
     //when product gets created we return response 
     res.status(200).json({

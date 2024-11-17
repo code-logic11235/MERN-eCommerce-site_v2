@@ -8,19 +8,16 @@ import {
     deleteProduct
 
  } from '../controllers/productControllers.js';
-
+import { isAuthenticatedUser, authorizeRoles } from '../middlewares/auth.js';
 
 //routes for product resource 
 
-router.route("/products").get(getProducts); //getProducts is our controller function
-
-router.route("/admin/products").post(newProduct);
-
+router.route("/products").get( getProducts); 
 router.route("/products/:id").get(getProductDetails);
 
-router.route("/products/:id").put(updateProduct);
-
-router.route("/products/:id").delete(deleteProduct);
+router.route("/admin/products").post(isAuthenticatedUser, authorizeRoles('admin'), newProduct); // auth req
+router.route("/admin/products/:id").put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct); //auth req
+router.route("/admin/products/:id").delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct); // auth req
 
 
 export default router;
