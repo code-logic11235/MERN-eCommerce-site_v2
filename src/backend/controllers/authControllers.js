@@ -4,6 +4,7 @@ import { getResetPasswordTemplate } from '../utils/emailTemplate.js';
 import ErrorHandler from '../utils/errorHandler.js';
 import sendEmail from '../utils/sendEmail.js';
 import sendToken from '../utils/sendToken.js';
+import crypto from "crypto"
 
 //register User => api/register
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -57,7 +58,7 @@ export const logoutUser = catchAsyncErrors(async (req, res, next) => {
 })
 
 
-//forgot password => api/login
+//forgot password => api/password/forgot
 export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
 
@@ -67,7 +68,6 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     if(!user){
         return next(new ErrorHandler("User not found with this email", 404)); 
     }
-  
     //get reset password token
     const resetToken = user.getResetPasswordToken();
     await user.save();
@@ -77,7 +77,6 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
 
     const message = getResetPasswordTemplate(user?.name, resetUrl);
-    console.log(message)
     try {
         await sendEmail({
             email: user.email,
@@ -94,5 +93,30 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
         await user.save();
         return next(new ErrorHandler(error?.message, 500)); 
     }
-    // sendToken(user, 200, res);
+
+})
+
+export const resetPassword = catchAsyncErrors(async (req,res,next)=>{
+    const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
+
+    const user = await User.findOne({
+        resetPasswordToken,
+        resetPasswordExpired: {$gt: Date.now()}
+    })
+
+    if(!user){
+        return next(new ErrorHandler("Password reset token is invalid or has been expired", 500)); 
+    }
+    //check if password dont matches
+    if(req.body.password !== req.body.confirmPassword){
+        return next(new ErrorHandler("Password does not match", 500)); 
+    }
+
+    //set the new password
+    user.password = req.body.password;
+    user.resetPasswordExpired = undefined;
+    user.resetPasswordToken = undefined;
+
+    await user.save();
+    sendToken(user, 200, res);
 })
