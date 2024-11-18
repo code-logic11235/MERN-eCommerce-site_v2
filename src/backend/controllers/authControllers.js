@@ -95,7 +95,7 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     }
 
 })
-
+//change the password after getting reset password token set in user model /password/reset/{token}
 export const resetPassword = catchAsyncErrors(async (req,res,next)=>{
     const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
 
@@ -119,4 +119,14 @@ export const resetPassword = catchAsyncErrors(async (req,res,next)=>{
 
     await user.save();
     sendToken(user, 200, res);
+})
+
+//Get current user profile => api/me
+
+export const getUserProfile = catchAsyncErrors(async (req, res, next) =>{
+    const user = await User.findById(req?.user?._id);
+
+    res.status(200).json({
+        user
+    })
 })
