@@ -147,7 +147,7 @@ export const updateCurrentPassword = catchAsyncErrors(async (req, res, next) =>{
     })
 })
 
-// update Password => /api/me/updateProfile
+// update user profile => /api/me/updateProfile
 export const updateProfile = catchAsyncErrors(async (req, res, next) =>{
     const newUserData = {
         name: req.body.name,
@@ -185,5 +185,35 @@ export const getUserDetail = catchAsyncErrors(async (req, res, next) =>{
     
     res.status(200).json({
         user
+    })
+})
+
+// ADMIN update details for admin profile => /api/admin/user/:id
+export const updateUser = catchAsyncErrors(async (req, res, next) =>{
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role
+    }
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, { new: true});
+
+    
+    res.status(200).json({
+        user
+    })
+})
+
+// ADMIN delete profile => /api/admin/user/:id
+export const deleteUser = catchAsyncErrors(async (req, res, next) =>{
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler(`User not found with id: ${req.params.id}`, 404)); 
+    }
+    
+    await user.deleteOne()
+    
+    res.status(200).json({
+        success: true
     })
 })
