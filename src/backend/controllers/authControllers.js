@@ -141,6 +141,20 @@ export const updateCurrentPassword = catchAsyncErrors(async (req, res, next) =>{
     }
     user.password = req.body.password;
     user.save();
+
+    res.status(200).json({
+        user
+    })
+})
+
+// update Password => /api/me/updateProfile
+export const updateProfile = catchAsyncErrors(async (req, res, next) =>{
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email
+    }
+    const user = await User.findByIdAndUpdate(req.user._id, newUserData, { new: true});
+
     
     res.status(200).json({
         user
