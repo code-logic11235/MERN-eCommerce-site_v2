@@ -1,6 +1,7 @@
 import express from 'express'
-import { registerUser,loginUser,logoutUser, forgotPassword, resetPassword, getUserProfile, updateCurrentPassword, updateProfile } from '../controllers/authControllers.js';
-import { isAuthenticatedUser } from '../middlewares/auth.js';
+import { registerUser,loginUser,logoutUser, forgotPassword, resetPassword, 
+    getUserProfile, updateCurrentPassword, updateProfile, getAllUsers, getUserDetail } from '../controllers/authControllers.js';
+import { authorizeRoles, isAuthenticatedUser } from '../middlewares/auth.js';
 const router = express.Router();
 
 router.route("/register").post(registerUser);
@@ -14,5 +15,7 @@ router.route("/me").get(isAuthenticatedUser,getUserProfile);
 router.route("/password/update").put(isAuthenticatedUser,updateCurrentPassword);
 router.route("/me/updateProfile").put(isAuthenticatedUser,updateProfile);
 
+router.route("/admin/getAllUsers").get(isAuthenticatedUser,authorizeRoles('admin'),getAllUsers);
+router.route("/admin/user/:id").get(isAuthenticatedUser, authorizeRoles('admin'), getUserDetail);
 
 export default router;
