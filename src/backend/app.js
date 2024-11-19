@@ -4,6 +4,7 @@ import { connectDatabase } from './config/dbConnection.js';
 import errorsMiddleware from './middlewares/errorHandlerMiddleware.js';
 import productRoutes from './routes/products.js';
 import authRoutes from './routes/auth.js';
+import orderRoutes from './routes/order.js'
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -34,6 +35,7 @@ app.use(cookieParser());
 //import all routes
 app.use("/api", productRoutes);
 app.use("/api", authRoutes);
+app.use("/api", orderRoutes);
 
 // when you use "next()" in our controller it will send a error object to our errorsMiddleware
 app.use(errorsMiddleware);
