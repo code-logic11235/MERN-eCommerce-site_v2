@@ -5,7 +5,10 @@ import {
     newProduct, 
     getProductDetails,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    createProductReview,
+    getProductReview,
+    deleteReview
 
  } from '../controllers/productControllers.js';
 import { isAuthenticatedUser, authorizeRoles } from '../middlewares/auth.js';
@@ -19,5 +22,10 @@ router.route("/admin/products").post(isAuthenticatedUser, authorizeRoles('admin'
 router.route("/admin/products/:id").put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct); //auth req
 router.route("/admin/products/:id").delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct); // auth req
 
+router.route("/reviews")
+    .put(isAuthenticatedUser, createProductReview)
+    .get(isAuthenticatedUser, getProductReview);
 
+router.route("/admin/reviews")
+    .delete(isAuthenticatedUser,authorizeRoles('admin'), deleteReview);
 export default router;

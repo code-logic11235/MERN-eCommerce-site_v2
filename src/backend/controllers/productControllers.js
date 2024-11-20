@@ -6,17 +6,18 @@ import APIFilters from "../utils/apiFilters.js";
 //logic for our product resource
 
 //=> /api/products
+// TODO LOOK OVER THIS AGIN to understand
 export const getProducts = catchAsyncErrors (async (req, res) =>{
     const itemPerPage = 4;
     const apiFilters = new APIFilters(Product, req.query).search().filters(); 
 
-    console.log(req.user)
+
     let products = await apiFilters.query; // returns the result and access it by going inside of object
     let productCount = products.length
     
     apiFilters.pagination(itemPerPage);
     products = await apiFilters.query.clone();
-    // res.clearCookie('jwttoken')
+
     res.status(200).json({
         itemPerPage,
         productCount,
@@ -73,5 +74,102 @@ export const deleteProduct = catchAsyncErrors (async (req, res, next) =>{
 
     res.status(200).json({
         message: "product deleted"
+    });
+});
+
+
+//Create / update product review => /api/product/:id
+export const createProductReview = catchAsyncErrors (async (req, res, next) =>{
+   
+   const {rating, comment, productId } = req.body;
+   const review = {
+    user: req?.user?._id,
+    rating: Number(rating),
+    comment
+   }
+   
+    const product = await Product.findById(productId);
+    if(!product){
+        return next(new ErrorHandler('Product Not Found', 404));
+    }
+    let numOfReviews = product.reviews.length;
+    // check if current user has review current product before
+    const isReviewed = product?.reviews?.find(
+        review=> review.user.toString() === req?.user?._id.toString()
+    )
+    // if they have review then update the review
+    if(isReviewed){
+        // loop through the list of reviews to find the login user
+        product.reviews.forEach((review)=>{
+            if(review?.user?.toString() === req?.user?._id.toString()){
+                review.comment = comment;
+                review.rating = rating;
+            }
+        });
+    }else { 
+        // if not reviewed then create new review
+        product.reviews.push(review);
+        product.numOfReviews = numOfReviews
+
+        
+    }
+    // average ratign of the products
+    product.ratings = product.reviews.reduce(function(acc, item) {return(item.rating + acc)}, 0) / (numOfReviews < 1 ? 1 : numOfReviews +1)
+
+    await product.save({validateBeforeSave: false});
+    
+
+    res.status(200).json({
+       success: true
+    });
+});
+
+// get review  => api/reviews?id={abc123}
+export const getProductReview = catchAsyncErrors (async (req, res, next) =>{
+    const product = await Product.findById(req?.query?.id);
+    if(!product){
+        return next(new ErrorHandler('Product Not Found', 404));
+    }
+    
+    res.status(200).json({
+        reviews: product.reviews
+    });
+});
+
+
+// ADMIN delete review  => api/admin/review
+export const deleteReview = catchAsyncErrors (async (req, res, next) =>{
+   
+    let product = await Product.findById(req.query.productId);
+
+    if (!product) {
+      return next(new ErrorHandler("Product not found", 404));
+    }
+  
+    const reviews = product?.reviews?.filter(
+      (review) => review._id.toString() !== req?.query?.id.toString()
+    );
+
+    const numOfReviews = reviews.length;
+  
+
+    const updatedReview = reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length
+    const ratings =
+    numOfReviews === 0
+        ? 0
+        : updatedReview;
+
+
+
+
+    product = await Product.findByIdAndUpdate(
+      req.query.productId,
+      { reviews, numOfReviews, ratings },
+      { new: true }
+    );
+  
+    res.status(200).json({
+      success: true,
+      product,
     });
 });
