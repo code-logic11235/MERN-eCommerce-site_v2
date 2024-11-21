@@ -4,9 +4,7 @@ import React from "react";
 function App() {
     return (
       <div className="App">
-        <Header />
-        <ProductList />
-        <Footer />
+        {console.log("hello worllldd")}
       </div>
     );
   }
