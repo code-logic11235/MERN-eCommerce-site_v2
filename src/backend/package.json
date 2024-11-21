@@ -7,9 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/backend/app.js",
-    "dev": "NODE_ENV=DEVELOPMENT nodemon src/backend/app.js",
-    "prod": "NODE_ENV=PRODUCTION nodemon src/backend/app.js",
-    "seed": "DB_LOCAL_URI=mongodb://127.0.0.1:27017/ShopHaven node src/backend/seed/seeder.js"
+    "dev": "NODE_ENV=DEVELOPMENT nodemon src/app.js",
+    "prod": "NODE_ENV=PRODUCTION nodemon src/app.js",
+    "seed": "DB_LOCAL_URI=mongodb://127.0.0.1:27017/ShopHaven node src/seed/seeder.js"
   },
   "repository": {
     "type": "git",

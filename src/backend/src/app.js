@@ -23,7 +23,7 @@ process.on('uncaughtException', (err) => {
     }
 });
 //loads environment variables, path tells location of the .env file. by default it looks in the root directory, but this is a custom path
-dotenv.config({path: "src/backend/config/config.env"}); 
+dotenv.config({ path: 'src/config/config.env' });
 
 
 //connecting to DB
