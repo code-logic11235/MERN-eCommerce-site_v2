@@ -21,7 +21,7 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
     const { email, password } = req.body;
 
     if( !email || !password){
-        return next(new ErrorHandler("please enter email & password", 400))
+        return next(new ErrorHandler("please enter email & password", 400));
     }
 
     const user = await User.findOne({
@@ -29,7 +29,7 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
     }).select("+password"); // we have to check password because our model doesnt return password
 
     if(!user){
-        return next(new ErrorHandler("Invalid email or password", 401))
+        return next(new ErrorHandler("Invalid email or password", 401));
     }
 
     //check if password is correct 
