@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "proxy": "http://localhost:4000",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
@@ -16,12 +16,15 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
     "bootstrap": "^5.3.3",
+    "http-proxy-middleware": "^3.0.3",
     "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.4.1",
     "react-redux": "^9.1.2",
-    "react-router-dom": "^7.0.1"
+    "react-router-dom": "^7.0.1",
+    "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.9",
