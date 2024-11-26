@@ -10,6 +10,8 @@ import Header from "./components/layout/header.jsx";
 import Footer from "./components/layout/footer.jsx";
 import Home from "./components/layout/home.jsx";
 import ProductDetails from "./components/product/productDetails.jsx";
+import Login from "./components/auth/login.jsx";
+import RegisterUser from "./components/auth/registerUser.jsx";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/product/:id' element={<ProductDetails/>} />
+            <Route path='/login' element= {<Login/>}/>
+            <Route path='/register' element= {<RegisterUser/>}/>
           </Routes>
         </div>
         <Footer/>
