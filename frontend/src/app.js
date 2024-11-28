@@ -12,7 +12,7 @@ import Home from "./components/layout/home.jsx";
 import ProductDetails from "./components/product/productDetails.jsx";
 import Login from "./components/auth/login.jsx";
 import RegisterUser from "./components/auth/registerUser.jsx";
-
+import Profile from "./components/user/profile.jsx";
 function App() {
   return (
     <Router>
@@ -26,6 +26,7 @@ function App() {
             <Route path='/product/:id' element={<ProductDetails/>} />
             <Route path='/login' element= {<Login/>}/>
             <Route path='/register' element= {<RegisterUser/>}/>
+            <Route path='/me/profile' element= {<Profile/>}/>
           </Routes>
         </div>
         <Footer/>

@@ -7,7 +7,7 @@ import { useLogoutMutation } from "../../redux/api/auth";
 
 const Header = () =>{
   const {isLoading} = useGetCurrentUserQuery();
-  
+  // let isLoading = true
   const {user} = useSelector((state) => state.auth)
   const navigate = useNavigate();
   const [logout, {}] = useLogoutMutation();
