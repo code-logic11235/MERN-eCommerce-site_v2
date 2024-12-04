@@ -8,7 +8,6 @@ import StarRatings from "react-star-ratings";
 const ProductDetails = () => {
     const [activeImg, setActiveImg] = useState('');
     const params = useParams();
-    console.log(params, '--------------------------------')
 
     const {data, isLoading, error, isError} = useGetProductDetailsQuery(params?.id);
     const product = data?.product;

@@ -19,8 +19,11 @@ const Header = () =>{
   }
 
   useEffect(()=>{
-    navigate('/')
+    if(user?.name){
+      navigate('/')
 
+    }
+    
   },[user])
 
 
