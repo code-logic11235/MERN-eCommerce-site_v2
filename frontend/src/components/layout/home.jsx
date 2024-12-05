@@ -15,13 +15,14 @@ const Home = () =>{
     const keyword = searchParams.get("keyword") || ""; 
     const min = searchParams.get("min") ; 
     const max = searchParams.get("max") ; 
+    const category = searchParams.get("category") ;
 
-    
     const params = {page, keyword}; // turn it into params obj to pass to our query
     
     min !== null && (params.min = min);
     max !== null && (params.max = max);
-    
+    category !== null && (params.category = category)
+
   console.log(params)
     const {data, isLoading, error, isError} = useGetProductsQuery( params);
     useEffect(()=>{
