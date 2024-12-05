@@ -18,13 +18,13 @@ const Header = () =>{
     logout();
   }
 
-  useEffect(()=>{
-    if(user?.name){
-      navigate('/')
+  // useEffect(()=>{
+  //   if(user?.name){
+  //     navigate('/')
 
-    }
+  //   }
     
-  },[user])
+  // },[user])
 
 
 

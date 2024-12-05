@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-// import { getPriceQueryParams } from "../../helpers/helpers";
+import { getPriceQueryParams } from "../../helpers/helpers";
 import { PRODUCT_CATEGORIES } from "../../constants/constants.js";
 import StarRatings from "react-star-ratings";
 
@@ -49,8 +49,8 @@ const Filters = () => {
   const handleButtonClick = (e) => {
     e.preventDefault();
 
-    // searchParams = getPriceQueryParams(searchParams, "min", min);
-    // searchParams = getPriceQueryParams(searchParams, "max", max);
+    searchParams = getPriceQueryParams(searchParams, "min", min);
+    searchParams = getPriceQueryParams(searchParams, "max", max);
 
     const path = window.location.pathname + "?" + searchParams.toString();
     navigate(path);

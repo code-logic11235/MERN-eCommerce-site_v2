@@ -11,6 +11,7 @@ const ProductDetails = () => {
 
     const {data, isLoading, error, isError} = useGetProductDetailsQuery(params?.id);
     const product = data?.product;
+    
     useEffect(()=>{
         if(isError) {
             toast.error(error?.data?.message)
