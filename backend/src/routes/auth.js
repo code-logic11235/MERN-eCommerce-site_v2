@@ -4,7 +4,8 @@ import { registerUser,loginUser,logoutUser,
     getUserProfile, updateCurrentPassword, 
     updateProfile, getAllUsers, 
     getUserDetail, updateUser,
-    deleteUser} from '../controllers/authControllers.js';
+    deleteUser,
+    uploadAvatar} from '../controllers/authControllers.js';
 import { authorizeRoles, isAuthenticatedUser } from '../middlewares/auth.js';
 const router = express.Router();
 
@@ -23,8 +24,8 @@ router.route("/admin/getAllUsers").get(isAuthenticatedUser,authorizeRoles('admin
 router.route("/admin/user/:id")
     .get(isAuthenticatedUser, authorizeRoles('admin'), getUserDetail)
     .put(isAuthenticatedUser, authorizeRoles('admin'), updateUser)
-    .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteUser)
+    .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteUser);
 
-
+router.route("/me/upload_avatar").put(isAuthenticatedUser,uploadAvatar);
 
 export default router;

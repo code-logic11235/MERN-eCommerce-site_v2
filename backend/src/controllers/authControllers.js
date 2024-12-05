@@ -217,3 +217,15 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) =>{
         success: true
     })
 })
+// upload user avatar => /api/v1/me/upload_avatar
+export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
+   
+    const avatarRes = await upload_file(req.body.avatar, "ShopHaven/avatars");
+    const user = await User.findByIdAndUpdate(req?.user?._id, {
+        avatar: avatarRes
+    })
+
+    res.status(200).json({
+       user
+    })
+})
