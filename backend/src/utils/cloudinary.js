@@ -1,7 +1,7 @@
 import cloudinary from 'cloudinary';
 import dotenv from 'dotenv'
 
-dotenv.config({path: "backend/config/config.env"})
+dotenv.config({ path: 'src/config/config.env' }); 
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,13 +9,13 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 
 })
-
 export const upload_file = (file, folder) =>{
+    
     return new Promise((res, rej)=>{
         cloudinary.uploader.upload(
             file,
             (result) =>{
-                resolve({
+                res({
                     public_id: result.public_id,
                     url: result.url,
                 });
