@@ -1,6 +1,6 @@
 import catchAsyncErrors from '../middlewares/catchAsyncErrors.js'
 import User from "../models/user.js"
-import { upload_file } from '../utils/cloudinary.js';
+import { delete_file, upload_file } from '../utils/cloudinary.js';
 import { getResetPasswordTemplate } from '../utils/emailTemplate.js';
 import ErrorHandler from '../utils/errorHandler.js';
 import sendEmail from '../utils/sendEmail.js';
@@ -222,6 +222,11 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) =>{
 export const uploadAvatar = catchAsyncErrors(async (req, res, next) => {
    
     const avatarRes = await upload_file(req.body.avatar, "ShopHaven/avatars");
+
+    if(req?.user?.avatar?.url){
+        await delete_file(req?.user?.avatar?.public_id);
+    }
+
     const user = await User.findByIdAndUpdate(req?.user?._id, {
         avatar: avatarRes
     })

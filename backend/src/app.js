@@ -29,7 +29,7 @@ dotenv.config({ path: 'src/config/config.env' });
 //connecting to DB
 connectDatabase();
 //middle ware parse incoming request wiht JSON. based on body parser
-app.use(express.json());
+app.use(express.json({limit: "3mb"})); // limit a 3mb upload size 
 app.use(cookieParser());
 
 //import all routes
