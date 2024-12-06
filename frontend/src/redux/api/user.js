@@ -34,7 +34,17 @@ export const userApi = createApi({
             invalidatesTags: ['user'] //specify which parts of the cache should be invalidated when certain actions occur, 
             //such as creating, updating, or deleting data. this will re fetch new data
         }),
+        uploadAvatar: builder.mutation({ 
+            query(body) {
+                return {
+                    url: "/me/upload_avatar",
+                    method: "PUT",
+                    body,
+                }
+            },
+            invalidatesTags: ['user'] 
+        }),
 
     })
 })
-export const {useGetCurrentUserQuery, useUpdateUserProfileMutation} = userApi;
+export const {useGetCurrentUserQuery, useUpdateUserProfileMutation, useUploadAvatarMutation} = userApi;
