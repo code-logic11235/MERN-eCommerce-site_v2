@@ -73,8 +73,8 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
     await user.save();
 
-    //create reset password url
-    const resetUrl = `${process.env.FRONTEND_URL}/api/password/reset/${resetToken}`;
+    //create reset password url for frontend //will hit port3000
+    const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
 
     const message = getResetPasswordTemplate(user?.name, resetUrl);
@@ -110,7 +110,7 @@ export const resetPassword = catchAsyncErrors(async (req,res,next)=>{
     }
     //check if password dont matches
     if(req.body.password !== req.body.confirmPassword){
-        return next(new ErrorHandler("Password does not match", 500)); 
+        return next(new ErrorHandler("Password does not match", 400)); 
     }
 
     //set the new password
