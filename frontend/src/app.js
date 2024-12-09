@@ -16,6 +16,9 @@ import Profile from "./components/user/profile.jsx";
 import UpdateProfile from "./components/user/updateProfile.jsx";
 import ProtectedRoutes from "./components/auth/protectedRoutes.js";
 import UploadAvatar from "./components/user/uploadAvatar.jsx";
+import UpdatePassword from "./components/user/updatePassword.jsx";
+import ForgotPassword from "./components/auth/forgotPassword.jsx";
+import ResetPassword from "./components/auth/resetPassword.jsx";
 
 function App() {
   return (
@@ -30,7 +33,10 @@ function App() {
             <Route path='/product/:id' element={<ProductDetails/>} />
             <Route path='/login' element= {<Login/>}/>
             <Route path='/register' element= {<RegisterUser/>}/>
-        
+            <Route path='/password/forgot' element= {<ForgotPassword/>}/>
+            <Route path='/password/reset/:token' element= {<ResetPassword/>}/>
+
+
             <Route path='/me/profile' 
             element= {
                 <ProtectedRoutes> 
@@ -51,6 +57,14 @@ function App() {
               element= {
                   <ProtectedRoutes> 
                     <UploadAvatar/> 
+                  </ProtectedRoutes>
+                }
+              />
+
+            <Route path='/me/update_password' 
+              element= {
+                  <ProtectedRoutes> 
+                    <UpdatePassword/> 
                   </ProtectedRoutes>
                 }
               />
