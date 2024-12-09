@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useGetProductDetailsQuery } from "../../redux/api/productsApi";
+import { productApi, useGetProductDetailsQuery } from "../../redux/api/productsApi";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import Loader from "../layout/loader";
 import StarRatings from "react-star-ratings";
+import { useDispatch } from "react-redux";
+import { setCartItem } from "../../redux/features/cartSlice";
 
 const ProductDetails = () => {
+  const dispatch = useDispatch();
+
   const params = useParams();
   const [activeImg, setActiveImg] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -48,6 +52,19 @@ const ProductDetails = () => {
 
   }
 
+  const setItemToCart = () =>{
+    const cartItem = {
+      product: product?._id,
+      name: product?.name,
+      price: product?.price,
+      image: product?.images[0].url,
+      stock: product?.stock,
+      quantity
+    }
+    dispatch(setCartItem(cartItem))
+    toast.success("Successfully Added item to cart!")
+  }
+
   if (isLoading) return <Loader />;
   return (
     <div className="row d-flex justify-content-around">
@@ -63,7 +80,7 @@ const ProductDetails = () => {
         </div>
         <div className="row justify-content-start mt-5">
           {product?.images?.map((img, key) => (
-            <div className="col-2 ms-4 mt-2">
+            <div className="col-2 ms-4 mt-2" key={key}>
               <a role="button">
                 <img
                   className={`d-block border rounded p-3 cursor-pointer 
@@ -110,7 +127,7 @@ const ProductDetails = () => {
             type="number"
             className="form-control count d-inline"
             value={quantity}
-            readonly
+            readOnly
           />
           <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
         </div>
@@ -118,7 +135,8 @@ const ProductDetails = () => {
           type="button"
           id="cart_btn"
           className="btn btn-primary d-inline ms-4"
-          disabled=""
+          disabled={product.stock === 0}
+          onClick={setItemToCart}
         >
           Add to Cart
         </button>
