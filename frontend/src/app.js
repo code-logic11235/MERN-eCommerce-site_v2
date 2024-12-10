@@ -20,6 +20,7 @@ import UpdatePassword from "./components/user/updatePassword.jsx";
 import ForgotPassword from "./components/auth/forgotPassword.jsx";
 import ResetPassword from "./components/auth/resetPassword.jsx";
 import Cart from "./components/cart/cart.jsx";
+import Shipping from "./components/cart/shipping.jsx";
 
 function App() {
   return (
@@ -37,6 +38,12 @@ function App() {
             <Route path='/password/forgot' element= {<ForgotPassword/>}/>
             <Route path='/password/reset/:token' element= {<ResetPassword/>}/>
             <Route path='/cart' element= {<Cart/>}/>
+            
+            <Route path="/shipping" element={
+              <ProtectedRoutes> 
+                <Shipping/>
+              </ProtectedRoutes> 
+              }/>
 
             <Route path='/me/profile' 
             element= {
