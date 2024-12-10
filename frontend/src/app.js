@@ -21,6 +21,8 @@ import ForgotPassword from "./components/auth/forgotPassword.jsx";
 import ResetPassword from "./components/auth/resetPassword.jsx";
 import Cart from "./components/cart/cart.jsx";
 import Shipping from "./components/cart/shipping.jsx";
+import ConfirmOrder from "./components/cart/confirmOrder.jsx";
+import PaymentMethod from "./components/cart/paymentMethod.jsx";
 
 function App() {
   return (
@@ -38,12 +40,29 @@ function App() {
             <Route path='/password/forgot' element= {<ForgotPassword/>}/>
             <Route path='/password/reset/:token' element= {<ResetPassword/>}/>
             <Route path='/cart' element= {<Cart/>}/>
-            
+
             <Route path="/shipping" element={
               <ProtectedRoutes> 
                 <Shipping/>
               </ProtectedRoutes> 
-              }/>
+            }
+            />
+            <Route path="/confirm_order" element={
+              <ProtectedRoutes> 
+                <ConfirmOrder/>
+              </ProtectedRoutes> 
+              }
+              />
+
+            <Route path='/payment_method' 
+              element= {
+                  <ProtectedRoutes> 
+                    <PaymentMethod/> 
+                  </ProtectedRoutes>
+                }
+              />
+
+          
 
             <Route path='/me/profile' 
             element= {
@@ -77,6 +96,7 @@ function App() {
                 }
               />
 
+            
           </Routes>
 
 

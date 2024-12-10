@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {countries} from 'countries-list'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInfo } from "../../redux/features/cartSlice";
+import { useNavigate } from "react-router-dom";
+import MetaData from "../layout/metaData";
+import CheckoutSteps from "./checkoutSteps";
 
 const Shipping = () => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const countriesList = Object.values(countries) 
 
     const [address, setAddress] = useState('')
@@ -20,7 +23,7 @@ const Shipping = () => {
       if (shippingInfo) {
         setAddress(shippingInfo?.address);
         setCity(shippingInfo?.city);
-        setZipCode(shippingInfo?.zipCode);
+        setZip(shippingInfo?.zipCode);
         setPhoneNo(shippingInfo?.phoneNo);
         setCountry(shippingInfo?.country);
       }
@@ -30,11 +33,15 @@ const Shipping = () => {
     const submitHandler = (e)=>{
         e.preventDefault();
         dispatch(saveShippingInfo({address, city, phoneNo, zip, country}))
+        navigate('/confirm_order')
     }
 
 
   return (
     <>
+    <MetaData tittle={"Shipping Info"}/>
+
+    <CheckoutSteps shipping/>
       <div className="row wrapper mb-5">
         <div className="col-10 col-lg-5">
           <form
