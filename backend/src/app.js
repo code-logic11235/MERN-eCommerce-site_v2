@@ -6,6 +6,7 @@ import productRoutes from './routes/products.js';
 import authRoutes from './routes/auth.js';
 import orderRoutes from './routes/order.js'
 import cookieParser from 'cookie-parser';
+import paymentRoute from "./routes/payment.js"
 
 const app = express();
 
@@ -36,6 +37,8 @@ app.use(cookieParser());
 app.use("/api", productRoutes);
 app.use("/api", authRoutes);
 app.use("/api", orderRoutes);
+app.use("/api", paymentRoute);
+
 
 // when you use "next()" in our controller it will send a error object to our errorsMiddleware
 app.use(errorsMiddleware);
