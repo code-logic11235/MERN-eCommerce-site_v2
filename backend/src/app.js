@@ -30,7 +30,21 @@ dotenv.config({ path: 'src/config/config.env' });
 //connecting to DB
 connectDatabase();
 //middle ware parse incoming request wiht JSON. based on body parser
-app.use(express.json({limit: "3mb"})); // limit a 3mb upload size 
+
+app.use(
+    express.json({
+      limit: "10mb",
+      verify: (req, res, buf) => {
+        req.rawBody = buf.toString();
+      },
+    })
+  );
+
+//     Stripe requires the raw, unmodified body of the webhook request for signature verification. Stripe signs each webhook event, and to validate the authenticity of the event, you need to compare the signature sent in the headers (Stripe-Signature) with one generated using the raw body of the request.
+// req.rawBody stores this raw body as a string (using buf.toString()), so that you can use it for signature verification when calling stripe.webhooks.constructEvent() in paymentController.js backend.
+
+
+
 app.use(cookieParser());
 
 //import all routes
