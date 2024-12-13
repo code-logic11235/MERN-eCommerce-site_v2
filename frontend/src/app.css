@@ -563,3 +563,10 @@ footer {
   border-radius: 0.3rem;
   color: #fa9c23;
 }
+
+
+/* order table */
+
+tbody + thead{
+  display: none;
+}

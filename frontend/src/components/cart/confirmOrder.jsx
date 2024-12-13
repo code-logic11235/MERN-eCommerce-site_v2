@@ -1,17 +1,48 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MetaData from '../layout/metaData'
 import { calculateOrderCost } from '../../helpers/helpers';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CheckoutSteps from './checkoutSteps';
+import { useStripeCheckoutSessionMutation } from '../../redux/api/order';
+import toast from 'react-hot-toast';
 
 const ConfirmOrder = () => {
     const { cartItems, shippingInfo } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.auth);
 
     const { itemsPrice, shippingPrice, taxPrice, totalPrice } = calculateOrderCost(cartItems);
+    const [
+      stripeCheckoutSession,
+      { data: checkoutData, error: checkoutError, isLoading },
+    ] = useStripeCheckoutSessionMutation();
+ 
 
+    useEffect(() => {
+      if (checkoutData) {
 
+        window.location.href = checkoutData?.url;
+      }
+  
+      if (checkoutError) {
+        toast.error(checkoutError?.data?.message);
+      }
+      
+    }, [checkoutData, checkoutError]);
+ 
+    function proceedHandler(){
+      // thsi is the body that will be sent to back end
+        const orderData = {
+          shippingInfo,
+          orderItems: cartItems,
+          itemsPrice,
+          shippingAmount: shippingPrice,
+          taxAmount: taxPrice,
+          totalAmount: totalPrice,
+        };
+
+        stripeCheckoutSession(orderData);
+    }
     return (
         <>
         <CheckoutSteps shipping confirmOrder/>
@@ -33,11 +64,11 @@ const ConfirmOrder = () => {
     
               <hr />
               <h4 className="mt-4">Your Cart Items:</h4>
-                //display each item in your cart 
-              {cartItems?.map((item) => (
+               
+              {cartItems?.map((item, key) => (
                 <>
                   <hr />
-                  <div className="cart-item my-1">
+                  <div className="cart-item my-1" key={key}>
                     <div className="row">
                       <div className="col-4 col-lg-2">
                         <img
@@ -88,14 +119,14 @@ const ConfirmOrder = () => {
                 </p>
     
                 <hr />
-                <Link
-                  to="/payment_method"
+                <button
+                  
                   id="checkout_btn"
                   className="btn btn-primary w-100"
-
+                  onClick={proceedHandler}
                 >
                   Proceed to Payment
-                </Link>
+                </button>
               </div>
             </div>
           </div>

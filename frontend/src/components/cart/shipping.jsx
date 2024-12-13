@@ -13,17 +13,18 @@ const Shipping = () => {
 
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
-    const [zip, setZip] = useState('')
+    const [zipCode, setZipCode] = useState('')
     const [phoneNo, setPhoneNo] = useState('')
     const [country, setCountry] = useState('')
 
     const { shippingInfo } = useSelector((state) => state.cart);
     // save shipping info in local for persistance
+
     useEffect(() => {
       if (shippingInfo) {
         setAddress(shippingInfo?.address);
         setCity(shippingInfo?.city);
-        setZip(shippingInfo?.zipCode);
+        setZipCode(shippingInfo?.zipCode);
         setPhoneNo(shippingInfo?.phoneNo);
         setCountry(shippingInfo?.country);
       }
@@ -32,7 +33,7 @@ const Shipping = () => {
     
     const submitHandler = (e)=>{
         e.preventDefault();
-        dispatch(saveShippingInfo({address, city, phoneNo, zip, country}))
+        dispatch(saveShippingInfo({address, city, phoneNo, zipCode, country}))
         navigate('/confirm_order')
     }
 
@@ -46,7 +47,7 @@ const Shipping = () => {
         <div className="col-10 col-lg-5">
           <form
             className="shadow rounded bg-body"
-            onClick={(e) => submitHandler(e)}
+            onSubmit={(e) => submitHandler(e)}
           >
             <h2 className="mb-4">Shipping Info</h2>
             <div className="mb-3">
@@ -103,8 +104,8 @@ const Shipping = () => {
                 id="postal_code_field"
                 className="form-control"
                 name="postalCode"
-                value={zip}
-                onChange={(e)=>{setZip(e.target.value)}}
+                value={zipCode}
+                onChange={(e)=>{setZipCode(e.target.value)}}
                 required
               />
             </div>

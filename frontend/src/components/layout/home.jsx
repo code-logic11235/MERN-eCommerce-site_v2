@@ -24,7 +24,7 @@ const Home = () =>{
     max !== null && (params.max = max);
     category !== null && (params.category = category)
     ratings !== null && (params.ratings = ratings);
-  console.log(params)
+
     const {data, isLoading, error, isError} = useGetProductsQuery( params);
     useEffect(()=>{
         if(isError) {

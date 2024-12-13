@@ -20,7 +20,7 @@ export const calculateOrderCost = (cartItems) => {
     );
   
     const shippingPrice = itemsPrice > 200 ? 0 : 25; // if price over 200 free shipping else 25 for shipping
-    const taxPrice = Number((0.15 * itemsPrice).toFixed(2)); //15% tax
+    const taxPrice = Number((0.07 * itemsPrice).toFixed(2)); //15% tax
     const totalPrice = (itemsPrice + shippingPrice + taxPrice).toFixed(2);
   
     return {
