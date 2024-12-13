@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Metadata from "../layout/metaData";
 import { useMyOrdersQuery } from "../../redux/api/order";
+import { clearCart } from "../../redux/features/cartSlice";
 
 const MyOrders = () => {
   const { data, isLoading, error } = useMyOrdersQuery();
@@ -23,7 +24,7 @@ const MyOrders = () => {
     }
 
     if (orderSuccess) {
-      console.log("DISPATCHING");
+
       dispatch(clearCart());
       navigate("/me/orders");
     }
