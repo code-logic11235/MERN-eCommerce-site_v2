@@ -2,6 +2,7 @@ import Product from "../models/products.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import APIFilters from "../utils/apiFilters.js";
+import Orders from '../models/order.js'
 
 //logic for our product resource
 
@@ -39,7 +40,7 @@ export const newProduct = catchAsyncErrors (async (req, res) =>{
 
 //get single product details => /api/products/:id
 export const getProductDetails = catchAsyncErrors (async (req, res, next) =>{
-    const product = await Product.findById(req?.params?.id);
+    const product = await Product.findById(req?.params?.id).populate('reviews.user');
     if(!product){
         return next(new ErrorHandler('Product Not Found', 404));
     }
@@ -171,5 +172,20 @@ export const deleteReview = catchAsyncErrors (async (req, res, next) =>{
     res.status(200).json({
       success: true,
       product,
+    });
+});
+
+
+//Can user review, can only leave review if user has purchased before => /api/canReview/:id
+export const canUserReview = catchAsyncErrors (async (req, res, next) =>{
+  const orders = await Orders.find({
+    user: req.user._id,
+    "orderItems.product": req.query.productId,
+  })
+  if(orders.length === 0) {
+    return res.status(200).json({canReviewed: false});
+  }
+    res.status(200).json({
+        canReview: true
     });
 });
