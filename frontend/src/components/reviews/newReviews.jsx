@@ -39,7 +39,7 @@ const NewReview = ({ productId }) => {
         <button
           id="review_btn"
           type="button"
-          class="btn btn-primary mt-4"
+          className="btn btn-primary mt-4"
           data-bs-toggle="modal"
           data-bs-target="#ratingModal"
         >
@@ -47,30 +47,30 @@ const NewReview = ({ productId }) => {
         </button>
       )}
 
-      <div class="row mt-2 mb-5">
-        <div class="rating w-50">
+      <div className="row mt-2 mb-5">
+        <div className="rating w-50">
           <div
-            class="modal fade"
+            className="modal fade"
             id="ratingModal"
-            tabindex="-1"
+            tabIndex="-1"
             role="dialog"
             aria-labelledby="ratingModalLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="ratingModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="ratingModalLabel">
                     Submit Review
                   </h5>
                   <button
                     type="button"
-                    class="btn-close"
+                    className="btn-close"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   <StarRatings
                     rating={rating}
                     starRatedColor="#ffb829"
@@ -82,7 +82,7 @@ const NewReview = ({ productId }) => {
                   <textarea
                     name="review"
                     id="review"
-                    class="form-control mt-4"
+                    className="form-control mt-4"
                     placeholder="Enter your comment"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
@@ -90,7 +90,7 @@ const NewReview = ({ productId }) => {
 
                   <button
                     id="new_review_btn"
-                    class="btn w-100 my-4 px-4"
+                    className="btn w-100 my-4 px-4"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                     onClick={submitHandler}
