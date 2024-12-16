@@ -1,5 +1,12 @@
 import express from 'express'
-import { newOrder, getOrderDetails,getCurrentUserOrder, getAllOrders, updateOrder, deleteOrder } from '../controllers/orderControllers.js';
+import { 
+    newOrder, 
+    getOrderDetails,
+    getCurrentUserOrder, 
+    getAllOrders, 
+    updateOrder, 
+    deleteOrder, 
+    getSales } from '../controllers/orderControllers.js';
 import { authorizeRoles, isAuthenticatedUser } from '../middlewares/auth.js';
 const router = express.Router();
 
@@ -13,5 +20,5 @@ router.route("/admin/orders/:id")
     .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteOrder);
 
 
-
+router.route("/admin/get_sales").get(isAuthenticatedUser, authorizeRoles('admin'), getSales);
 export default router;
