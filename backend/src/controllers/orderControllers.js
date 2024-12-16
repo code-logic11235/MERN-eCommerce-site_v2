@@ -200,7 +200,7 @@ export const getSales = (catchAsyncErrors(async (req, res, next) => {
     const endDate = new Date(req.query.endDate);
 
     startDate.setUTCHours(0, 0, 0, 0); //starts at 12am
-    endDate.setUTCHours(23, 58, 59, 9999); // ends at 12pm, 24hours
+    endDate.setUTCHours(23, 59, 59, 999); // ends at 12pm, 24hours
 
 
     const {
