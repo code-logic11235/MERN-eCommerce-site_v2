@@ -9,7 +9,9 @@ import {
     createProductReview,
     getProductReview,
     deleteReview,
-    canUserReview
+    canUserReview,
+    getAdminProducts,
+    uploadProductImages
 
  } from '../controllers/productControllers.js';
 import { isAuthenticatedUser, authorizeRoles } from '../middlewares/auth.js';
@@ -19,9 +21,14 @@ import { isAuthenticatedUser, authorizeRoles } from '../middlewares/auth.js';
 router.route("/products").get( getProducts); 
 router.route("/products/:id").get(getProductDetails);
 
+router.route("/admin/products").get(isAuthenticatedUser, authorizeRoles('admin'), getAdminProducts);
+
 router.route("/admin/products").post(isAuthenticatedUser, authorizeRoles('admin'), newProduct); // auth req
 router.route("/admin/products/:id").put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct); //auth req
 router.route("/admin/products/:id").delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct); // auth req
+
+router.route("/admin/products/:id/upload_images").put(isAuthenticatedUser, authorizeRoles('admin'), uploadProductImages);
+
 
 router.route("/reviews")
     .put(isAuthenticatedUser, createProductReview)

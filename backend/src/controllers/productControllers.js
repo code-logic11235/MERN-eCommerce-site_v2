@@ -3,6 +3,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import APIFilters from "../utils/apiFilters.js";
 import Orders from '../models/order.js'
+import {upload_file} from '../utils/cloudinary.js'
 
 //logic for our product resource
 
@@ -25,7 +26,15 @@ export const getProducts = catchAsyncErrors (async (req, res) =>{
         products
     });
 });
+// ADMIN ROUTE get products => api/admin/products
+export const getAdminProducts = catchAsyncErrors (async (req, res) =>{
+    const products = await Product.find();
+   
 
+    res.status(200).json({
+        products
+    });
+});
 
 // admin route, only admin can create new products. => /api/admin/products
 export const newProduct = catchAsyncErrors (async (req, res) =>{
@@ -174,6 +183,27 @@ export const deleteReview = catchAsyncErrors (async (req, res, next) =>{
       product,
     });
 });
+
+// ADMIN upload new product images => /api/admin/products/:id/upload_images
+export const uploadProductImages = catchAsyncErrors (async (req, res) =>{
+    // console.log(req.body)
+    let product = await Product.findById(req?.params?.id);
+    if(!product){
+        return next(new ErrorHandler("Product Not Found", 401));
+    }
+
+    const uploader = async (image) => upload_file(image,"ShopHaven/products")
+    const urls = await Promise.all((req?.body?.images).map(uploader)); // maps incoming files (base64) to this function called uploader
+    console.log('hey', product)
+    product?.images?.push(...urls); //urls is an array of image URLs returned by the upload_file function
+    await product?.save();
+    res.status(200).json({
+        product
+    });
+});
+
+
+
 
 
 //Can user review, can only leave review if user has purchased before => /api/canReview/:id
