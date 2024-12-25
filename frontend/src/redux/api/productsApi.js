@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 export const productApi = createApi({
     reducerPath: 'productApi',
     baseQuery: fetchBaseQuery({ baseUrl: "/api"}),
-    tagTypes: ['Product'],
+    tagTypes: ['Product', "AdminProducts"],
     endpoints: (builder) => ({
         getProducts: builder.query({ // use for get request. post,put,delete will use builder.mutation
             query: (params) => ({
@@ -34,8 +34,51 @@ export const productApi = createApi({
             query: (productId) => `/can_Review/?productId=${productId}`,
             
         }),
+        getAdminProducts: builder.query({
+            query: () => `/admin/products`,
+            providesTags: ["AdminProducts"]
+        }),
+        createProduct: builder.mutation({
+            query: (body) => ({
+                url: `/admin/products`,
+                method: "POST",
+                body,
+                
+            }),
+            invalidatesTags: ['AdminProducts']
+            
+        }),
+        updateProduct: builder.mutation({
+            query: ({id, body}) => ({
+                url: `/admin/products/${id}`,
+                method: "PUT",
+                body
+                
+            }),
+            invalidatesTags: ['product','AdminProducts']
+            
+        }),
+        uploadProductImages: builder.mutation({
+            query: ({id, body}) => ({
+                url: `/admin/products/${id}/upload_images`,
+                method: "PUT",
+                body
+                
+            }),
+            invalidatesTags: ['product']
+            
+        }),
         
 
     })
 })
-export const {useGetProductsQuery, useGetProductDetailsQuery, useSubmitReviewMutation, useCanUserReviewQuery} = productApi;
+export const {
+    useGetProductsQuery, 
+    useGetProductDetailsQuery, 
+    useSubmitReviewMutation, 
+    useCanUserReviewQuery,
+    useGetAdminProductsQuery,
+    useCreateProductMutation,
+    useUpdateProductMutation,
+    useUploadProductImagesMutation,
+} = productApi;

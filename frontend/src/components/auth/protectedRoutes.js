@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom';
 import Loader from '../layout/loader';
 
-const protectedRoutes = ({admin, children}) => {
+const protectedRoutes = (props) => {
+    const {admin, children} = props
+    console.log(admin, '---------------------')
     const {isAuthenticated,user, loading} = useSelector((state)=> state.auth);
 
     if(loading){

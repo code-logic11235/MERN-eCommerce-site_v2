@@ -9,7 +9,7 @@ import { clearCart } from "../../redux/features/cartSlice";
 
 const MyOrders = () => {
   const { data, isLoading, error } = useMyOrdersQuery();
-
+  // let data, error ;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -87,6 +87,7 @@ const MyOrders = () => {
 
     return orders;
   };
+  
   return (
     <div>
       <Metadata title={"My Orders"} />

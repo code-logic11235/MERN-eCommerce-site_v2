@@ -66,10 +66,10 @@ const ConfirmOrder = () => {
               <h4 className="mt-4">Your Cart Items:</h4>
                
               {cartItems?.map((item, key) => (
-                <>
+                <div key={key}>
                   <hr />
-                  <div className="cart-item my-1" key={key}>
-                    <div className="row">
+                  <div className="cart-item my-1">
+                    <div className="row" >
                       <div className="col-4 col-lg-2">
                         <img
                           src={item?.image}
@@ -92,7 +92,7 @@ const ConfirmOrder = () => {
                     </div>
                   </div>
                   <hr />
-                </>
+                </div>
               ))}
             </div>
     

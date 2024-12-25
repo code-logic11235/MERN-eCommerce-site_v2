@@ -3,7 +3,7 @@ import{useNavigate, useSearchParams} from 'react-router-dom'
 import Pagination from "react-js-pagination"
 
 const customPagination = ({resPerPage, filteredProductsCount}) => {
-    const [currentPage, setCurrentPage] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
     let [searchParams] = useSearchParams(); // gets params from url such ass localhost:3000/product?page=1, would return page: 1
     const navigate = useNavigate();
     
