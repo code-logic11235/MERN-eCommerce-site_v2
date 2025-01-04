@@ -5,7 +5,6 @@ import Loader from '../layout/loader';
 
 const protectedRoutes = (props) => {
     const {admin, children} = props
-    console.log(admin, '---------------------')
     const {isAuthenticated,user, loading} = useSelector((state)=> state.auth);
 
     if(loading){

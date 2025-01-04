@@ -31,7 +31,7 @@ const UploadImages = () => {
 
   useEffect(() => {
     if (data?.product) {
-      setUploadedImages(data?.product?.images);
+      setUploadedImages(data?.product?.images); // set the images already uploaded 
     }
 
     if (error) {
@@ -83,7 +83,7 @@ const onChange = (e) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log({ id: params?.id, body: { images } })
+    // console.log({ id: params?.id, body: { images } })
     uploadProductImages({ id: params?.id, body: { images } });
   };
 
@@ -189,7 +189,7 @@ const onChange = (e) => {
               id="register_button"
               type="submit"
               className="btn w-100 py-2"
-            //   disabled={isLoading || isDeleteLoading}
+              // disabled={isLoading || isDeleteLoading}
             >
               {isLoading ? "Uploading..." : "Upload"}
             </button>
