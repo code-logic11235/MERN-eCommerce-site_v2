@@ -74,18 +74,6 @@ export const updateProduct = catchAsyncErrors (async (req, res, next) =>{
     });
 });
 
-//ADMIN delete  => /api/admin/products/:id
-export const deleteProduct = catchAsyncErrors (async (req, res, next) =>{
-    const product = await Product.findById(req?.params?.id);
-    if(!product){
-        return next(new ErrorHandler('Product Not Found', 404));
-    }
-   await product.deleteOne();
-
-    res.status(200).json({
-        message: "product deleted"
-    });
-});
 
 
 //Create / update product review => /api/product/:id
@@ -225,6 +213,25 @@ export const deleteProductImage = catchAsyncErrors (async (req, res) =>{
 
 
 
+// Delete product   =>  /api/v1/products/:id
+export const deleteProduct = catchAsyncErrors(async (req, res) => {
+    const product = await Product.findById(req?.params?.id);
+  
+    if (!product) {
+      return next(new ErrorHandler("Product not found", 404));
+    }
+  
+    // Deleting image associated with product
+    for (let i = 0; i < product?.images?.length; i++) {
+      await delete_file(product?.images[i].public_id);
+    }
+  
+    await product.deleteOne();
+  
+    res.status(200).json({
+      message: "Product Deleted",
+    });
+  });
 
 
 //Can user review, can only leave review if user has purchased before => /api/canReview/:id
