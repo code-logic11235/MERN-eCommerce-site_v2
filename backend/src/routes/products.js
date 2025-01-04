@@ -11,7 +11,8 @@ import {
     deleteReview,
     canUserReview,
     getAdminProducts,
-    uploadProductImages
+    uploadProductImages,
+    deleteProductImage
 
  } from '../controllers/productControllers.js';
 import { isAuthenticatedUser, authorizeRoles } from '../middlewares/auth.js';
@@ -28,7 +29,7 @@ router.route("/admin/products/:id").put(isAuthenticatedUser, authorizeRoles('adm
 router.route("/admin/products/:id").delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct); // auth req
 
 router.route("/admin/products/:id/upload_images").put(isAuthenticatedUser, authorizeRoles('admin'), uploadProductImages);
-
+router.route("/admin/products/:id/delete_image").put(isAuthenticatedUser, authorizeRoles('admin'), deleteProductImage);
 
 router.route("/reviews")
     .put(isAuthenticatedUser, createProductReview)

@@ -3,7 +3,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import APIFilters from "../utils/apiFilters.js";
 import Orders from '../models/order.js'
-import {upload_file} from '../utils/cloudinary.js'
+import {delete_file, upload_file} from '../utils/cloudinary.js'
 
 //logic for our product resource
 
@@ -201,6 +201,27 @@ export const uploadProductImages = catchAsyncErrors (async (req, res) =>{
         product
     });
 });
+
+// ADMIN delete  product images => /api/admin/products/:id/delete_images
+export const deleteProductImage = catchAsyncErrors (async (req, res) =>{
+   
+    let product = await Product.findById(req?.params?.id);
+    if(!product){
+        return next(new ErrorHandler("Product Not Found", 401));
+    }
+    const isDeleted = await delete_file(req.body.imgId);
+
+    if(isDeleted) {
+        product.images = product?.images?.filter(
+            (img) => img.public_id !== req.body.imgId
+        )
+    }
+    await product?.save({validateBeforeSave: false});
+    res.status(200).json({
+        product
+    });
+});
+
 
 
 
