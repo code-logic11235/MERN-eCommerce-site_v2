@@ -5,7 +5,7 @@ import MetaData from "../layout/metaData";
 import AdminLayout from "../layout/adminLayout";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-//   useDeleteProductImageMutation,
+  useDeleteProductImageMutation,
   useGetProductDetailsQuery,
   useUploadProductImagesMutation,
 } from "../../redux/api/productsApi";
@@ -22,10 +22,7 @@ const UploadImages = () => {
   const [uploadProductImages, { isLoading, error, isSuccess }] =
     useUploadProductImagesMutation();
 
-//   const [
-//     deleteProductImage,
-//     { isLoading: isDeleteLoading, error: deleteError },
-//   ] = useDeleteProductImageMutation();
+  const [deleteProductImage,{ isLoading: isDeleteLoading, error: deleteError, isSuccess : deleteSucess }] = useDeleteProductImageMutation();
 
   const { data } = useGetProductDetailsQuery(params?.id);
 
@@ -38,12 +35,16 @@ const UploadImages = () => {
       toast.error(error?.data?.message);
     }
 
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
+    if(deleteSucess) {
+      toast.success("Image DELETED");
+    }
 
     if (isSuccess) {
       setImagesPreview([]);
+      console.log('SUCESSS')
       toast.success("Images Uploaded");
       navigate("/admin/products");
     }
@@ -86,7 +87,7 @@ const onChange = (e) => {
     // console.log({ id: params?.id, body: { images } })
     uploadProductImages({ id: params?.id, body: { images } });
   };
-
+  // it wont delete original images gulam made we have to upload new images to OUR cloudinary for that to work. 
   const deleteImage = (imgId) => {
     deleteProductImage({ id: params?.id, body: { imgId } });
   };
@@ -172,7 +173,7 @@ const onChange = (e) => {
                             }}
                             className="btn btn-block btn-danger cross-button mt-1 py-0"
                             type="button"
-                            // disabled={isLoading || isDeleteLoading}
+                            disabled={isLoading || isDeleteLoading}
                             onClick={() => deleteImage(img?.public_id)}
                           >
                             <i className="fa fa-trash"></i>
@@ -189,7 +190,7 @@ const onChange = (e) => {
               id="register_button"
               type="submit"
               className="btn w-100 py-2"
-              // disabled={isLoading || isDeleteLoading}
+              disabled={isLoading || isDeleteLoading}
             >
               {isLoading ? "Uploading..." : "Upload"}
             </button>
