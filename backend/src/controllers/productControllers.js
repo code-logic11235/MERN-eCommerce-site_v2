@@ -194,9 +194,9 @@ export const uploadProductImages = catchAsyncErrors (async (req, res) =>{
 
     const uploader = async (image) => upload_file(image,"ShopHaven/products")
     const urls = await Promise.all((req?.body?.images).map(uploader)); // maps incoming files (base64) to this function called uploader
-    console.log('hey', product)
+
     product?.images?.push(...urls); //urls is an array of image URLs returned by the upload_file function
-    await product?.save();
+    await product?.save({validateBeforeSave: false});
     res.status(200).json({
         product
     });
