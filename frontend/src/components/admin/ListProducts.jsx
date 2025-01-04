@@ -5,7 +5,7 @@ import { MDBDataTable } from "mdbreact";
 import { Link } from "react-router-dom";
 import MetaData from "../layout/metaData";
 import {
-//   useDeleteProductMutation,
+  useDeleteProductMutation,
   useGetAdminProductsQuery,
 } from "../../redux/api/productsApi";
 import AdminLayout from "../layout/adminLayout";
@@ -13,31 +13,31 @@ import AdminLayout from "../layout/adminLayout";
 const ListProducts = () => {
   const { data, isLoading, error } = useGetAdminProductsQuery();
 
-//   const [
-//     deleteProduct,
-//     { isLoading: isDeleteLoading, error: deleteError, isSuccess },
-//   ] = useDeleteProductMutation();
+  const [
+    deleteProduct,
+    { isLoading: isDeleteLoading, error: deleteError, isSuccess },
+  ] = useDeleteProductMutation();
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
 
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
 
-    // if (isSuccess) {
-    //   toast.success("Product Deleted");
-    // }
+    if (isSuccess) {
+      toast.success("Product Deleted");
+    }
   }, [error, 
-    // deleteError, 
-    // isSuccess
+    deleteError, 
+    isSuccess
 ]);
 
-//   const deleteProductHandler = (id) => {
-//     deleteProduct(id);
-//   };
+  const deleteProductHandler = (id) => {
+    deleteProduct(id);
+  };
 
   const setProducts = () => {
     const products = {
@@ -88,8 +88,8 @@ const ListProducts = () => {
             </Link>
             <button
               className="btn btn-outline-danger ms-2"
-            //   onClick={() => deleteProductHandler(product?._id)}
-            //   disabled={isDeleteLoading}
+              onClick={() => deleteProductHandler(product?._id)}
+              disabled={isDeleteLoading}
             >
               <i className="fa fa-trash"></i>
             </button>
