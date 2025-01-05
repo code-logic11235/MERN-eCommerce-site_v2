@@ -10,37 +10,38 @@ import AdminLayout from "../layout/adminLayout";
 //   useGetAdminOrdersQuery,
 // } from "../../redux/api/orderApi";
 import MetaData from "../layout/metaData";
-import { useGetAdminOrdersQuery } from "../../redux/api/order";
+import { useDeleteOrderMutation, useGetAdminOrdersQuery } from "../../redux/api/order";
 
 const ListOrders = () => {
   const { data, isLoading, error } = useGetAdminOrdersQuery();
   console.log(data)
 
-//   const [
-//     deleteOrder,
-//     { error: deleteError, isLoading: isDeleteLoading, isSuccess },
-//   ] = useDeleteOrderMutation();
+  const [
+    deleteOrder,
+    { error: deleteError, isLoading: isDeleteLoading, isSuccess },
+  ] = useDeleteOrderMutation();
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
 
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
 
-    // if (isSuccess) {
-    //   toast.success("Order Deleted");
-    // }
+    if (isSuccess) {
+      toast.success("Order Deleted");
+    }
   }, [error,
-    //  deleteError, 
-    // isSuccess
+     deleteError, 
+    isSuccess
 ]);
 
-//   const deleteOrderHandler = (id) => {
-//     deleteOrder(id);
-//   };
+  const deleteOrderHandler = (id) => {
+    console.log(id,'---------------')
+    deleteOrder(id);
+  };
 
   const setOrders = () => {
     const orders = {
@@ -86,8 +87,8 @@ const ListOrders = () => {
 
             <button
               className="btn btn-outline-danger ms-2"
-            //   onClick={() => deleteOrderHandler(order?._id)}
-            //   disabled={isDeleteLoading}
+              onClick={() => deleteOrderHandler(order?._id)}
+              disabled={isDeleteLoading}
             >
               <i className="fa fa-trash"></i>
             </button>
