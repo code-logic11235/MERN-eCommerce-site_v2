@@ -5,7 +5,7 @@ import forgotPassword from '../../components/auth/forgotPassword';
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({ baseUrl: "/api"}),
-    tagTypes: ["user"], // use to manage and invalidate/ refetch parts of cache
+    tagTypes: ["user", "AdminUsers","AdminUser"], // use to manage and invalidate/ refetch parts of cache
     endpoints: (builder) => ({
         getCurrentUser: builder.query({ // use for get request. post,put,delete will use builder.mutation
             query: () => "/me",
@@ -79,6 +79,20 @@ export const userApi = createApi({
             query: () => `/admin/getAllUsers`,
             providesTags: ['AdminUsers']
         }),
+        getUserDetails: builder.query({
+            query: (id) => `/admin/user/${id}`,
+            providesTags: ["AdminUser"]
+        }),
+        updateUser: builder.mutation({
+            query({ id, body }) {
+              return {
+                url: `/admin/user/${id}`,
+                method: "PUT",
+                body,
+              };
+            },
+            invalidatesTags: ["AdminUsers"],
+          }),
 
     })
 })
@@ -89,5 +103,7 @@ export const {
     useUpdatePasswordMutation,
     useForgotPasswordMutation,
     useResetPasswordMutation,
-    useGetAdminUsersQuery
+    useGetAdminUsersQuery,
+    useGetUserDetailsQuery,
+    useUpdateUserMutation
 } = userApi;

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const orderApi = createApi({
   reducerPath: "orderApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["Order","AdminOrder", "AdminUsers"],
+  tagTypes: ["Order","AdminOrder"],
   endpoints: (builder) => ({
     createNewOrder: builder.mutation({
       query(body) {
