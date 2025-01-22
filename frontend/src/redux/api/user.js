@@ -73,7 +73,11 @@ export const userApi = createApi({
                     body,
                 }
             },
-          
+            
+        }),
+        getAdminUsers: builder.query({
+            query: () => `/admin/getAllUsers`,
+            providesTags: ['AdminUsers']
         }),
 
     })
@@ -84,5 +88,6 @@ export const {
     useUploadAvatarMutation,
     useUpdatePasswordMutation,
     useForgotPasswordMutation,
-    useResetPasswordMutation
+    useResetPasswordMutation,
+    useGetAdminUsersQuery
 } = userApi;
