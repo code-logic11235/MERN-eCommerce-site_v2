@@ -196,9 +196,10 @@ export const updateUser = catchAsyncErrors(async (req, res, next) =>{
         email: req.body.email,
         role: req.body.role
     }
-    const user = await User.findByIdAndUpdate(req.user.id, newUserData, { new: true});
 
-    
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {  new: true});
+
+
     res.status(200).json({
         user
     })
@@ -211,8 +212,11 @@ export const deleteUser = catchAsyncErrors(async (req, res, next) =>{
     if(!user){
         return next(new ErrorHandler(`User not found with id: ${req.params.id}`, 404)); 
     }
-    
+
     await user.deleteOne()
+    if(user?.avatar?.public_id) {
+        await delete_file(user?.avatar?.public_id)
+    }
     
     res.status(200).json({
         success: true
