@@ -39,7 +39,6 @@ const ListOrders = () => {
 ]);
 
   const deleteOrderHandler = (id) => {
-    console.log(id,'---------------')
     deleteOrder(id);
   };
 
