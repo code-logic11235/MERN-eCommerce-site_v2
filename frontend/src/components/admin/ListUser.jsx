@@ -10,38 +10,37 @@ import MetaData from "../layout/metaData";
 import AdminLayout from "../layout/adminLayout";
 
 import {
-//   useDeleteUserMutation,
+  useDeleteUserMutation,
   useGetAdminUsersQuery,
 } from "../../redux/api/user";
-// import { useGetAdminUserQuery, useDeleteUserMutation } from "../../redux/api/order";
 
 const ListUsers = () => {
   const { data, isLoading, error } = useGetAdminUsersQuery();
 
-//   const [
-//     deleteUser,
-//     { error: deleteError, isLoading: isDeleteLoading, isSuccess },
-//   ] = useDeleteUserMutation();
+  const [
+    deleteUser,
+    { error: deleteError, isLoading: isDeleteLoading, isSuccess },
+  ] = useDeleteUserMutation();
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
 
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
 
-    // if (isSuccess) {
-    //   toast.success("User Deleted");
-    // }
+    if (isSuccess) {
+      toast.success("User Deleted");
+    }
   }, [error, 
-    // deleteError, 
-    // isSuccess
+    deleteError, 
+    isSuccess
 ]);
 
   const deleteUserHandler = (id) => {
-    // deleteUser(id);
+    deleteUser(id);
   };
 
   const setUsers = () => {
@@ -94,7 +93,7 @@ const ListUsers = () => {
             <button
               className="btn btn-outline-danger ms-2"
               onClick={() => deleteUserHandler(user?._id)}
-            //   disabled={isDeleteLoading}
+              disabled={isDeleteLoading}
             >
               <i className="fa fa-trash"></i>
             </button>
