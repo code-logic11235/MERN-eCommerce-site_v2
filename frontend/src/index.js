@@ -3,12 +3,17 @@ import ReactDOM from "react-dom/client"
 import App from "./app.js";
 import {Provider} from 'react-redux'
 import { store } from "./redux/store.js";
+import { BrowserRouter as Router } from "react-router-dom";
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render( 
     //provider to create redux store
 <Provider store = {store}> 
-    <App /> 
+    <Router>
+        <App />
+    </Router>   
 </Provider>
 
 );

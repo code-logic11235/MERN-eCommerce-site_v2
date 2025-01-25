@@ -14,7 +14,6 @@ import { useDeleteOrderMutation, useGetAdminOrdersQuery } from "../../redux/api/
 
 const ListOrders = () => {
   const { data, isLoading, error } = useGetAdminOrdersQuery();
-  console.log(data)
 
   const [
     deleteOrder,

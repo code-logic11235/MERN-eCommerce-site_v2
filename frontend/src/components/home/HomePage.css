@@ -1,0 +1,69 @@
+#homePage {
+    background-image: url("../../../public/images/mastHead.jpg");
+    background-size: 100% 100%;  /* Ensures the entire image fits */
+    background-position: top;  /* Centers the image */
+    background-repeat: no-repeat;
+    width: 100%;  /* Full width */
+    height: 100vh;  /* Full viewport height */
+  }
+#logo{
+    background-image: url("../../../public/images/logo.jpg");
+    width: 50px;  /* Full width */
+    height: 50px;  
+    z-index: 100;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: relative;
+    margin: 0;
+}
+#atag-logo{
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+  @media screen and (max-width: 991px) {
+    #homePage {
+      background-image: url("../../../public/images/mastHead.jpg");
+      background-size: cover;  /* Ensures the entire image fits */
+      background-position: top;  /* Centers the image */
+      background-repeat: no-repeat;
+      width: 100%;  /* Full width */
+      height: 100vh;  /* Full viewport height */
+    }
+  }
+  /* .container{
+      margin: 0;
+      padding: 0;
+      min-width: none;
+    } */
+    .homepage-footer{
+        position: fixed;
+        color: white;
+        
+    }
+    .mastHead-header{
+      padding-top: 10%;
+    }
+    h1{
+        color: white;
+        font-family: "Cinzel", serif;
+        letter-spacing: 4px;
+        font-size: 78px;
+
+    }
+    h5{
+        color: white;
+        font-family: "open sans", serif;
+        font-weight: 300;
+        letter-spacing: .2px;
+    }
+    .homeParagraph{
+        max-width: 70%;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+    .search-homepage{
+        width: 40%;
+        /* height: 40px; */
+    }

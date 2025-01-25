@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const search = () => {
+const search = ({isHomePage}) => {
     const [keyword, setKeyword] = useState('');
     const navigate = useNavigate(); 
     const submitHandler = (e) => {
         e.preventDefault();
-
+        console.log('hit')
         if(keyword?.trim()){
             navigate(`/?keyword=${keyword}`);
         }else{
@@ -15,7 +15,7 @@ const search = () => {
     }
   return (
     <form onSubmit={submitHandler}>
-        <div className="input-group">
+        <div className={`input-group ${isHomePage ? "search-homepage" : ''}`}>
         <input
             type="text"
             id="search_field"

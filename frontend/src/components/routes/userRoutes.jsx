@@ -19,12 +19,13 @@ import MyOrders from "../order/myOrders.jsx";
 import OrderDetails from "../order/orderDetails.jsx";
 import Invoice from "../invoice/invoice.jsx"
 import { Route } from 'react-router-dom';
+import HomePage from '../home/HomePage.jsx';
 
 
 const UserRoutes = () => {
     return (
         <>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<HomePage />} />
             <Route path='/product/:id' element={<ProductDetails />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<RegisterUser />} />

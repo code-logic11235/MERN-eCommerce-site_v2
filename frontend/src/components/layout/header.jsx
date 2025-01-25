@@ -26,13 +26,13 @@ const Header = () =>{
     <nav className="navbar row">
       <div className="col-12 col-md-3 ps-5">
         <div className="navbar-brand">
-          <a href="/">
-            <img src="./././public/images/shopHaven_logo.png" alt="ShopHaven Logo" />
+          <a id = 'atag-logo' href="/">
+            <div id='logo' > </div>
           </a>
         </div>
       </div>
       <div className="col-12 col-md-6 mt-2 mt-md-0">
-       <Search/>
+       {/* <Search/> */}
       </div>
       <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
         <a href="/cart" style={{textDecoration: "none"}}>
