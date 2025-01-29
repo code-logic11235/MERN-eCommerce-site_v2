@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-
+import "./BackgroundSlider.css"
 import video1 from '../../../public/images/video1.mp4'
 import img1 from '../../../public/images/img2.jpg'
 import img2 from '../../../public/images/img3.jpg'
@@ -28,33 +28,64 @@ const BackgroundSlider = () => {
             description: 'CANDLES...'
         },
     ]
-    console.log(slides[currentSlide], currentSlide)
 
     const bgImageStyle ={
         backgroundImage: `url(${slides[currentSlide].url})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        height: '90%'
+        height: '100%',
+        width: '100%'
         }
+
+    const handleMouseOver= ()=>{
+        console.log('hit')
+    }
   return (
     <div className='container-style'>
+        <div id = 'bgContent'>
         {slides[currentSlide].type === 'video' ? 
          <video src={slides[currentSlide].url} autoPlay loop muted/>
          :
          <div style = {bgImageStyle}></div>
           }
-          <button onClick={()=>{setCurrentSlide(currentSlide + 1)}}>NEXT</button>
-          <button onClick={()=>{setCurrentSlide(currentSlide - 1)}}>BACK</button>
+        </div>
 
           <div id='content'>
-            <div >
-                section 1
+            <div 
+                className={`slider fragrances ${currentSlide === 0 ? 'active' : ''}`} 
+                onMouseOver={()=>{
+                    handleMouseOver()
+                    setCurrentSlide(0)}
+                } >
+                <h3>FINE FRAGRANCES</h3>
+                <h6>Hand Crafted to each order.</h6>
+                <div className={`slider-learn learn-fragrances ${currentSlide === 0 ? 'active' : 'deactive'}`}>
+                    <a href="">view more</a>
+                </div>
             </div>
-            <div >
-                section 2
+            <div 
+              className={`slider candles ${currentSlide === 1 ? 'active' : ''}`} 
+                onMouseOver={()=>{
+                    handleMouseOver()
+                    setCurrentSlide(1)}
+                }>
+                <h3>BOTIQUE CANDLES</h3>
+                <h6>Expertly crafted and cured boutique candles.</h6>
+                <div className={`slider-learn learn-candles ${currentSlide === 1 ? 'active' : 'deactive'}`}>
+                    <a href="">view more</a>
+                </div>
             </div>
-            <div >
-                about l’Essence
+            <div 
+                  className={`slider about ${currentSlide === 2 ? 'active' : ''}`} 
+                onMouseOver={()=>{
+                    handleMouseOver()
+                    setCurrentSlide(2)}
+                }>
+                <h3>ABOUT L'ESSENCE</h3>
+                <h6>Formulated and personalized since 1994.</h6>
+                <div className={`slider-learn learn-about ${currentSlide === 2 ? 'active' : 'deactive'}`}>
+                    <a href="">learn more</a>
+                </div>
             </div>
         </div>
 

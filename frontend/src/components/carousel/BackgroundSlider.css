@@ -1,0 +1,52 @@
+
+.slider a{
+    color: white;
+}
+
+/* Initially, hide the .slider with the .deactive class */
+.slider-learn.deactive {
+    opacity: 0;  /* Makes it invisible */
+    transform: translateY(100%); /* Slide out of view */
+    pointer-events: none; /* Prevents interaction */
+    transition: transform .6s ease, opacity .6s ease; /* Adds transition for sliding and fading */
+  }
+  
+  /* When active, reset opacity and transform */
+  .slider-learn.active {
+    opacity: 1;  /* Makes it visible */
+    transform: translateY(0); /* Slide into position */
+    pointer-events: auto; /* Allows interaction */
+    transition: transform .4s ease, opacity .6s ease; /* Adds transition for sliding and fading */
+  }
+  .slider {
+    h3{
+        font-size: 40px;
+        font-family: "League Gothic", serif;
+        letter-spacing: 3.5px;
+    }
+    h6{
+        font-size: 14px;
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 200;
+        font-style: normal;
+    }
+    a{
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 15px;
+    }
+    text-align: left;
+    color: white;
+    transform: translateY(0);
+    transition: transform .6s ease, opacity .6s ease;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+  .slider.active{
+    transform: translateY(-20%);
+    transition: transform .6s ease, opacity .6s ease
+  }
