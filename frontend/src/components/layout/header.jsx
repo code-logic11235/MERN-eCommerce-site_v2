@@ -4,7 +4,7 @@ import { useGetCurrentUserQuery } from "../../redux/api/user";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../redux/api/auth";
-
+import logo from '../../../public/images/Logo1.svg'
 const Header = () =>{
   const {isLoading} = useGetCurrentUserQuery();
   const { cartItems } = useSelector((state) => state.cart);
@@ -27,7 +27,7 @@ const Header = () =>{
       <div className="col-12 col-md-3 ps-5">
         <div className="navbar-brand">
           <a id = 'atag-logo' href="/">
-            <div id='logo' > </div>
+            <img id='logo' src={logo}/> 
           </a>
         </div>
       </div>
