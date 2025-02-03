@@ -1,69 +1,133 @@
-#homePage {
-    background-image: url("../../../public/images/mastHead.jpg");
-    background-size: 100% 100%;  /* Ensures the entire image fits */
-    background-position: top;  /* Centers the image */
-    background-repeat: no-repeat;
-    width: 100%;  /* Full width */
-    height: 100vh;  /* Full viewport height */
-  }
-#logo{
-    background-image: url("../../../public/images/logo.jpg");
-    width: 50px;  /* Full width */
-    height: 50px;  
-    z-index: 100;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    position: relative;
-    margin: 0;
+/* 
+@font-face {
+    font-family: 'bell-gothic-black';
+    src: url('../../../src/assets/fonts/bell-gothic-black.ttf') format('truetype');
+    font-weight: normal;
+  font-style: normal;
+} */
+#content{
+    z-index: 3;
+   position: absolute;
+   width: 90%;
+   height: 90%;
+   top: 10%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   align-items: flex-end;
+   color: rgb(193, 5, 5);
 }
-#atag-logo{
-    display: block;
-    width: 50px;
-    height: 50px;
+#bgContent{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
-  @media screen and (max-width: 991px) {
-    #homePage {
-      background-image: url("../../../public/images/mastHead.jpg");
-      background-size: cover;  /* Ensures the entire image fits */
-      background-position: top;  /* Centers the image */
-      background-repeat: no-repeat;
-      width: 100%;  /* Full width */
-      height: 100vh;  /* Full viewport height */
-    }
-  }
-  /* .container{
-      margin: 0;
-      padding: 0;
-      min-width: none;
-    } */
-    .homepage-footer{
-        position: fixed;
-        color: white;
-        
-    }
-    .mastHead-header{
-      padding-top: 10%;
-    }
-    h1{
-        color: white;
-        font-family: "Cinzel", serif;
-        letter-spacing: 4px;
-        font-size: 78px;
+/* /--------------------------// */
 
+#homePage{
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    background-color:rgb(225, 225, 225);
+}
+.container-style{
+
+    /* position: relative; */
+    height:100%;
+    width: 100%;
+    overflow: auto;  
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    
+}
+.homePage-MastHead{
+    height: 85vh;
+    width: 100%;
+    position: relative;
+    overflow: none;  
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.slider:nth-child(2){
+    height: 50%;
+}
+video{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+/* --------------------Home Search----------------------- */
+.search-form-wrapper{
+    top: 25%;
+    position: absolute;
+    z-index: 100;
+}
+
+/* --------------------sliders----------------------- */
+
+.slider a{
+    color: white;
+}
+
+/* Initially, hide the .slider with the .deactive class */
+.slider-learn.deactive {
+    opacity: 0;  /* Makes it invisible */
+    transform: translateY(100%); /* Slide out of view */
+    pointer-events: none; /* Prevents interaction */
+    transition: transform .6s ease, opacity .6s ease; /* Adds transition for sliding and fading */
+  }
+  
+  /* When active, reset opacity and transform */
+  .slider-learn.active {
+    opacity: 1;  /* Makes it visible */
+    transform: translateY(0); /* Slide into position */
+    pointer-events: auto; /* Allows interaction */
+    transition: transform .4s ease, opacity .6s ease; /* Adds transition for sliding and fading */
+  }
+  .slider {
+    h3{
+        font-size: 40px;
+        font-family: "League Gothic", serif;
+        letter-spacing: 3.5px;
     }
-    h5{
-        color: white;
-        font-family: "open sans", serif;
-        font-weight: 300;
-        letter-spacing: .2px;
+    h6{
+        font-size: 14px;
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 200;
+        font-style: normal;
     }
-    .homeParagraph{
-        max-width: 70%;
-        padding-top: 10px;
-        padding-bottom: 20px;
+    a{
+        font-family: "IBM Plex Mono", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 15px;
     }
-    .search-homepage{
-        width: 40%;
-        /* height: 40px; */
-    }
+    text-align: left;
+    color: white;
+    transform: translateY(0);
+    transition: transform .6s ease, opacity .6s ease;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+  .slider.active{
+    transform: translateY(-20%);
+    transition: transform .6s ease, opacity .6s ease
+  }
+
+  /* ----------TOP PRODUCT------------- */
+  #products_heading{
+    font-family: "League Gothic", serif; 
+    font-weight: bold;
+    letter-spacing: 2.5px;
+    color: #262626;
+    text-transform: uppercase;
+    /* text-align: right; */
+ }
