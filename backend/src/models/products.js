@@ -19,7 +19,9 @@ const productSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    images: [ {public_id: {type: String, required: true},
+    images: [ 
+        // {public_id: {type: String, required: true},
+        {
             url: {
                 type: String,
                 required: true
@@ -31,25 +33,12 @@ const productSchema = mongoose.Schema({
         required: [true, 'Please select category for this product'],
         enum: {
             values: [
-                'Electronics',
-                'Cameras',
-                'Laptops',
-                'Accessories',
-                'Headphones',
-                'Food',
-                "Books",
-                'Clothes/Shoes',
-                'Beauty/Health',
-                'Sports',
-                'Outdoor',
-                'Home'
+                'Fragrance',
+                'Candle',
+               
             ],
             message: 'Please select correct category for product'
         }
-    },
-    seller: {
-        type: String,
-        required: [true, 'Please enter product seller']
     },
     stock: {
         type: Number,
@@ -85,7 +74,7 @@ const productSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId, //user that created the product
         ref: 'User',
-        required: true
+        required: false
     }},
 
 {timeStamps: true}
