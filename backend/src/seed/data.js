@@ -20,6 +20,26 @@ export default [
     reviews: [],
   },
   {
+    name: "Acqua di Parma",
+    price: 76.99,
+    description:
+     `"Acqua di Parma" is a refined and sophisticated fragrance that captures the essence of Italian luxury. With fresh citrus notes of Sicilian lemon and a subtle blend of floral and woody undertones, it evokes the timeless elegance of the Mediterranean, offering a crisp, invigorating scent perfect for any occasion.` ,
+    ratings: 4.99,
+    images: [
+      {
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-8.0_dbj8m5",
+      },
+      {
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-8.1_hz7n5j",
+      },
+      
+    ],
+    category: "Fragrance",
+    stock: 10,
+    numOfReviews: 0,
+    reviews: [],
+  },
+  {
     name: "Noir 12",
     price: 48.99,
     description:
@@ -66,8 +86,9 @@ export default [
     ratings: 4.5,
     images: [
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-3.0_nj9gye",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-3.0_fhorsw",
       },
+
 
     ],
     category: "Fragrance",
@@ -78,13 +99,16 @@ export default [
   },
   {
     name: "Neroli 57",
-    price: 48.99,
+    price: 18.99,
     description:
       "A bright and uplifting fragrance that celebrates the crisp, citrusy essence of neroli blossoms. With its fresh floral notes and a touch of sweetness, it exudes a sense of warmth and elegance, evoking the feeling of a sunlit afternoon in a blooming orchard.",
     ratings: 4.8,
     images: [
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-6.0_nkv3uw",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-skinny-5.0_umwwvj",
+      },
+      {
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-skinny-5.1_lgyocv",
       },
 
     ],
@@ -96,16 +120,16 @@ export default [
   },
   {
     name: "Orange Fluer",
-    price: 38.99,
+    price: 18.99,
     description:
       "Orange Fleur is a vibrant and energizing fragrance that blends the zesty freshness of orange with the delicate sweetness of orange blossom. This bright, floral scent captures the essence of a sun-drenched citrus grove, offering a refreshing, uplifting experience that lingers with a touch of elegance.",
     ratings: 4.1,
     images: [
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-1.0_z1eche",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-skinny-4.0_crlo4o",
       },
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-1.1_q9uqtz",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-skinny-4.1_zfm6ky",
       },
     ],
     category: "Fragrance",
@@ -154,6 +178,7 @@ export default [
     numOfReviews: 0,
     reviews: [],
   },
+
   {
     name: "Lavande (spice)",
     price: 2.75,
@@ -174,96 +199,123 @@ export default [
   },
 
   {
-    name: "Amber & Willow",
-    price: 2.75,
+    name: "Heritage Sandle",
+    price: 31.99,
     description:
-      "A twist on Lavande 31, spice is a captivating blend of soothing lavender and warm, aromatic spices. The fresh, floral lavender meets the boldness of cinnamon and clove, creating a balanced yet dynamic fragrance that’s both calming and invigorating—perfect for those seeking a unique, comforting scent with a touch of intrigue.",
+      `"Heritage Sandal" is a rich, grounding candle that brings the warmth of sandalwood to the forefront, complemented by subtle hints of amber and musk. Its smooth, woody aroma creates an atmosphere of timeless elegance and tranquility, evoking a sense of tradition and refined luxury. Perfect for those who seek a cozy, yet sophisticated ambiance.`,
     ratings: 5,
     images: [
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-7.0_c6or4a",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-1.0_kdtcip",
+      },
+      {
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-1.1_x8hbp1",
       },
      
     ],
     category: "Candle",
 
-    stock: 12,
+    stock: 6,
     numOfReviews: 0,
     reviews: [],
   },
 
   {
-    name: "Lavande (spice)",
-    price: 2.75,
+    name: "Versailles spring",
+    price: 27.75,
     description:
-      "A twist on Lavande 31, spice is a captivating blend of soothing lavender and warm, aromatic spices. The fresh, floral lavender meets the boldness of cinnamon and clove, creating a balanced yet dynamic fragrance that’s both calming and invigorating—perfect for those seeking a unique, comforting scent with a touch of intrigue.",
+      `"Versailles Spring" captures the essence of a blooming garden in full bloom. With fresh notes of delicate florals, green grasses, and a hint of citrus, it evokes the timeless elegance and vibrant beauty of the historic Versailles gardens, bringing a breath of fresh air and luxury into any space.`,
     ratings: 5,
     images: [
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-7.0_c6or4a",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-2.1_mmjng5",
+      },
+      {
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-2.0_zo5ojh",
       },
      
     ],
     category: "Candle",
 
-    stock: 12,
+    stock: 8,
     numOfReviews: 0,
     reviews: [],
   },
 
   {
-    name: "Lavande (spice)",
-    price: 2.75,
+    name: "Acqua de Spirit",
+    price: 19.75,
     description:
-      "A twist on Lavande 31, spice is a captivating blend of soothing lavender and warm, aromatic spices. The fresh, floral lavender meets the boldness of cinnamon and clove, creating a balanced yet dynamic fragrance that’s both calming and invigorating—perfect for those seeking a unique, comforting scent with a touch of intrigue.",
+      `"Acqua de Spirit" is an invigorating fragrance that blends crisp aquatic notes with a touch of zesty citrus and soft florals. Its refreshing, airy composition embodies freedom and vitality, evoking the feeling of a brisk breeze over the ocean, bringing a sense of clarity and rejuvenation to any space.`,
     ratings: 5,
     images: [
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-7.0_c6or4a",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-7.0_gcmnco",
       },
      
     ],
     category: "Candle",
 
-    stock: 12,
+    stock: 5,
     numOfReviews: 0,
     reviews: [],
   },
 
   {
-    name: "Lavande (spice)",
-    price: 2.75,
+    name: "Versailles Fall",
+    price: 22.75,
     description:
-      "A twist on Lavande 31, spice is a captivating blend of soothing lavender and warm, aromatic spices. The fresh, floral lavender meets the boldness of cinnamon and clove, creating a balanced yet dynamic fragrance that’s both calming and invigorating—perfect for those seeking a unique, comforting scent with a touch of intrigue.",
-    ratings: 5,
+      `"Versailles Fall" is a warm and inviting fragrance that evokes the rich, golden tones of autumn. With notes of spiced woods, amber, and a hint of crisp apples, it conjures the beauty of fall at the grand Versailles estate, creating a cozy, luxurious atmosphere that’s perfect for the season.`,
+    ratings: 4.5,
     images: [
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-7.0_c6or4a",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-3.0_o2c8pq",
+      },
+      {
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-3.1_nwbydd",
       },
      
     ],
     category: "Candle",
 
-    stock: 12,
+    stock: 10,
     numOfReviews: 0,
     reviews: [],
   },
 
   {
-    name: "Lavande (spice)",
-    price: 2.75,
+    name: "French Cade Lavender",
+    price: 19.75,
     description:
-      "A twist on Lavande 31, spice is a captivating blend of soothing lavender and warm, aromatic spices. The fresh, floral lavender meets the boldness of cinnamon and clove, creating a balanced yet dynamic fragrance that’s both calming and invigorating—perfect for those seeking a unique, comforting scent with a touch of intrigue.",
-    ratings: 5,
+      `A sophisticated blend of wild lavender, infused with the earthy richness of cade wood. This fragrance combines the calming essence of lavender with smoky, resinous undertones, creating a serene yet grounded atmosphere that evokes the beauty of a lavender field in the French countryside.`,
+    ratings: 4.75,
     images: [
       {
-        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/bottle-7.0_c6or4a",
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-5.0_ysduhs",
       },
      
     ],
     category: "Candle",
 
-    stock: 12,
+    stock: 10,
+    numOfReviews: 0,
+    reviews: [],
+  },
+  {
+    name: "Acqua de Bruit",
+    price: 22.75,
+    description:
+      `"Acqua de Bruit" is an intriguing fragrance that balances the freshness of aquatic notes with the subtle depth of earthy woods. Its invigorating blend evokes the sound of a calm, flowing river, bringing a sense of serenity and natural vitality. Perfect for those seeking a clean, refreshing scent with a touch of mystery.`,
+    ratings: 5,
+    images: [
+      {
+        url: "https://res.cloudinary.com/taipham232/image/upload/v1737498983/ShopHaven/products/candle-6.0_liygbt",
+      },
+     
+    ],
+    category: "Candle",
+
+    stock: 10,
     numOfReviews: 0,
     reviews: [],
   },
